@@ -14,9 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,10 +52,18 @@ public class User implements Serializable {
     @Column(nullable = false)
     @Lob
     private String password;
-    @OneToMany
+    @ManyToMany
     private List<Authoritie> authoritieList;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    public User(String firstname, String lastname, String email, String password, List<Authoritie> authoritieList) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.authoritieList = authoritieList;
+    }
 
 }
