@@ -6,6 +6,7 @@
 package Grammi140.Exceptions;
 
 import Grammi140.Utilities.Apierror;
+import java.nio.file.AccessDeniedException;
 import java.util.Date;
 import javax.validation.UnexpectedTypeException;
 import javax.xml.bind.DataBindingException;
@@ -102,6 +103,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Apierror> badCredentialsException(BadCredentialsException e) {
+        return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({AccessDeniedException.class})
+    public ResponseEntity<Apierror> accessDeniedException(AccessDeniedException e) {
         return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 

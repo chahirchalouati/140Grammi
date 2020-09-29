@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -25,6 +28,16 @@ public class Application implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
     }
 
     /**
@@ -43,8 +56,8 @@ public class Application implements CommandLineRunner {
             encoder = new BCryptPasswordEncoder();
             List<User> users = Stream
                     .of(
-                            new User("user", "user", "user@gamil.com", encoder.encode("23051988"), authoritieRepository.findAll()),
-                            new User("admin", "admin", "admin@gamil.com", encoder.encode("23051988"), authoritieRepository.findAll())
+                            new User("user", "user", "user@gmail.com", encoder.encode("23051988"), authoritieRepository.findAll()),
+                            new User("admin", "admin", "admin@gmail.com", encoder.encode("23051988"), authoritieRepository.findAll())
                     ).collect(Collectors.toList());
             users.stream().forEach(userRepository::save);
 

@@ -5,6 +5,8 @@
  */
 package Grammi140.Models.User;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -40,11 +42,15 @@ public class Authoritie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer idAuthoritie;
     @Column(nullable = false, unique = true)
     private String authoritie;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
 
     public Authoritie(String authoritie) {

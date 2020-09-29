@@ -5,6 +5,8 @@
  */
 package Grammi140.JWT;
 
+import Grammi140.Models.User.Authoritie;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,5 @@ public class JwtResponse {
 
     private String accessToken;
     private String username;
-    private String authoritie;
+    private List<Authoritie> authoritie;
 }
