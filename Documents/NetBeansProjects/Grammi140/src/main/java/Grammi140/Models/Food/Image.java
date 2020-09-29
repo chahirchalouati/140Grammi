@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grammi140.Model.Food;
+package Grammi140.Models.Food;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,17 +31,18 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Entity
-@Table(name = "Videos")
+@Table(name = "Images")
 @NamedQueries({})
-public class Video implements Serializable {
+public class Image implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVideo;
+    private Long idImage;
     @Lob
-    private String videoUrl;
+    private String imageUrl;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
 }

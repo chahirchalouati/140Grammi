@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grammi140.Model.Food;
+package Grammi140.Models.User;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,30 +31,24 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Entity
-@Table(name = "Foods")
-@NamedQueries({})
-public class Food implements Serializable {
+@Table(name = "Authorities")
+@NamedQueries({
+    @NamedQuery(name = "Authoritie.findByAuthoritie", query = "SELECT a FROM Authoritie a WHERE a.authoritie=:authoritie")
+
+})
+public class Authoritie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFood;
-
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private Double price;
-    @Lob
-    private String description;
-
-    @OneToMany(targetEntity = Image.class)
-    private List<Image> imagesList;
-    @OneToMany(targetEntity = Video.class)
-    private List<Video> videoList;
-    @ManyToOne(targetEntity = FoodType.class)
-    private FoodType foodType;
-
+    private Integer idAuthoritie;
+    @Column(nullable = false, unique = true)
+    private String authoritie;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    public Authoritie(String authoritie) {
+        this.authoritie = authoritie;
+    }
 
 }

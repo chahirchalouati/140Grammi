@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grammi140.Model.Food;
+package Grammi140.Models.Food;
 
 /**
  *
  * @author Chahir Chalouati
  */
-public class VariantType {
+public class Menu {
 
 }
