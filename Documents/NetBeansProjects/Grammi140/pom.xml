@@ -84,6 +84,16 @@
             <version>0.9.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -93,6 +103,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>140Grammi</finalName>
     </build>
 
 </project>

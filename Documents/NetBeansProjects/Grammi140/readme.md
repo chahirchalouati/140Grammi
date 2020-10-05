@@ -21,3 +21,63 @@
 ** Groups -> ( ** FOOD groups like dishes for family and Dishes for kids ** )
 ** receipts 
 ** payments
+
+ 
+<* Logic part *> 
+
+**User
+ 
+*** Sign-In *** 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

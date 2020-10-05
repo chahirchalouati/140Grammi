@@ -9,17 +9,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,42 +32,33 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Entity
-@Table(name = "Users")
-@NamedQueries({
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email=:email ")
-})
-public class User implements Serializable {
+@Table(name = "Addresses")
+@NamedQueries({})
+public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
+    private Long idAddress;
     @Column(nullable = false)
-    private String firstname;
+    private String city;
     @Column(nullable = false)
-    private String lastname;
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String province;
     @Column(nullable = false)
-    @Lob
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
-    @ManyToMany()
-    private List<Authoritie> authoritieList;
-    @ManyToOne(targetEntity = Address.class)
-    private Address address;
+    private String street;
+    @Column(nullable = false)
+    private String house;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
 
-    public User(String firstname, String lastname, String email, String password, List<Authoritie> authoritieList, Address address) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.authoritieList = authoritieList;
-        this.address = address;
+    public Address(String city, String province, String street, String house) {
+
+        this.city = city;
+        this.province = province;
+        this.street = street;
+        this.house = house;
     }
 
 }

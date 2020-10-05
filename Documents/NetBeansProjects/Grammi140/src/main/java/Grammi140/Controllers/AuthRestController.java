@@ -43,8 +43,6 @@ public class AuthRestController {
     @Autowired
     AuthoritieRepository authoritieRepository;
 
-//    @Autowired
-//    UserService userService;
     @Autowired
     PasswordEncoder encoder;
 
