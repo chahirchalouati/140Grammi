@@ -8,11 +8,17 @@ package Grammi140.Controllers;
 import Grammi140.JWT.JwtResponse;
 import Grammi140.JWT.JwtUtils;
 import Grammi140.JWT.LoginRequest;
+import Grammi140.Models.User.Authoritie;
 import Grammi140.Models.User.User;
 import Grammi140.Repository.Repositories.AuthoritieRepository;
 import Grammi140.Repository.Repositories.UserRepository;
+import Grammi140.Services.UserService.UserService;
+import Grammi140.Utilities.Apierror;
+import java.util.Arrays;
+import java.util.Date;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,6 +55,9 @@ public class AuthRestController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping(value = "/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -62,9 +71,15 @@ public class AuthRestController {
         return ResponseEntity.ok(new JwtResponse(jwt, user.getEmail(), user.getAuthoritieList()));
     }
 
-//    @PostMapping(value = "/signup")
-//    public ResponseEntity<?> postAsUser(@RequestBody @Valid User user) {
-//        userService.register(user);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
+    @PostMapping(value = "/signup")
+    public ResponseEntity<?> postAsUser(@RequestBody @Valid User user) {
+
+        Authoritie autoritie = authoritieRepository.findByAuthoritie("USER");
+
+        boolean x = userService.SignIn(user, Arrays.asList(autoritie));
+        if (x) {
+            return new ResponseEntity<>(new Apierror("User created ", new Date(), HttpStatus.CREATED), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(new Apierror("User already exist", new Date(), HttpStatus.CONFLICT), HttpStatus.CONFLICT);
+    }
 }

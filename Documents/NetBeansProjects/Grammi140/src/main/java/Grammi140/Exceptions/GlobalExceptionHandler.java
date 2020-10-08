@@ -37,8 +37,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Apierror> dataIntegrityViolationException(DataIntegrityViolationException e) {
-
-        return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.CONFLICT), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(),
+                new Date(), HttpStatus.CONFLICT), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(DataBindingException.class)

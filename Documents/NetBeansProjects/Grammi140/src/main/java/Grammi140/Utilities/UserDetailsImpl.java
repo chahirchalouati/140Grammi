@@ -23,9 +23,9 @@ import org.springframework.stereotype.Component;
 public class UserDetailsImpl implements UserDetails {
 
     @Autowired
-    private User user;
+    private final User user;
 
-    private List<GrantedAuthority> grantedAuthoritys;
+    private final List<GrantedAuthority> grantedAuthoritys;
 
     public UserDetailsImpl(User user) {
         this.user = user;
